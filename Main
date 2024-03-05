@@ -1,0 +1,50 @@
+import javax.swing.JOptionPane;
+
+class Main {
+  public static void main(String[] args) {
+    
+
+    double sac, sal, dep;
+    int opcao, opcaoDep;
+    String[] opcoes = {"Sacar", "Depositar", "Cancelar"};
+    String[] opcoesDep = {"Boleto", "Pix", "TED"};
+    sal = 0;
+      
+
+    do {
+
+      
+      opcao = JOptionPane.showOptionDialog(null, "Selecione uma opção:", "Página inicial", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, "default");
+
+      
+      if (opcoes[opcao].equals("Sacar")) {
+        do {
+          sac = Float.parseFloat(JOptionPane.showInputDialog(null, "Qual o valor do saque? \n Saldo atual de R$" + sal));
+          if (sac <= sal && sac > 0) {
+            sal = sal - sac;
+            JOptionPane.showMessageDialog(null, "Valor sacado com sucesso. \n Novo saldo de R$" + sal);
+          } else if (sac <= 0) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um valor válido para saque.");
+          } else {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente para saque.");
+          }
+        } while ((sac > sal) || (sac < 0));
+
+        
+      } else if (opcoes[opcao].equals("Depositar")) {
+        opcaoDep = JOptionPane.showOptionDialog(null, "Selecione uma opção de depósito:", "Página inicial", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesDep, "default");
+        
+        dep = Float.parseFloat(JOptionPane.showInputDialog(null, "Qual o valor a ser depositado? \n Saldo atual de R$" + sal));
+        sal = sal + dep;
+        JOptionPane.showMessageDialog(null, "Valor depositado com sucesso \n Novo saldo de R$" + sal);
+
+        
+      } else {
+        JOptionPane.showMessageDialog(null, "Fechando o programa...");
+        break; 
+      }
+
+      
+    } while (true);
+  }
+}
